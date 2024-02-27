@@ -1,0 +1,29 @@
+{
+  "manifest_version": 4,
+  "type": "extension",
+  "name": "蠢猫",
+  "slug": "plugin_chunmao",
+  "description": "收发蠢猫消息",
+  "version": "0.1.0",
+  "icon": null,
+  "authors": [
+    {
+      "name": "Acceyuriko",
+      "link": "https://github.com/Acceyuriko"
+    }
+  ],
+  "platform": ["win32", "linux", "darwin"],
+  "injects": {
+    "renderer": "./renderer.js",
+    "main": "./main.js",
+    "preload": "./preload.js"
+  },
+  "repository": {
+    "repo": "LiteLoaderQQNT/Plugin-Template",
+    "branch": "main",
+    "release": {
+      "tag": "0.1.0",
+      "file": "Plugin-Template.zip"
+    }
+  }
+}
