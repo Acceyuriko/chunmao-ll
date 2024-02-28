@@ -121,6 +121,7 @@ export type MessageElement = {
     msgSeq: string;
     senderUin: string;
     peerUin: string;
+    chatType: number;
     elements: {
       elementType: number;
       elementId: string;

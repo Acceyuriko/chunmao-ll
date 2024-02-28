@@ -3,6 +3,7 @@ import axios from 'axios';
 import crypto from 'crypto';
 import { ipcMain } from 'electron';
 import express, { Request, Response } from 'express';
+import fs from 'fs';
 import path from 'path';
 import util from 'util';
 
@@ -159,6 +160,26 @@ class Adapter {
                     return element.textElement.content;
                   }
                   if (element.picElement) {
+                    fs.exists(element.picElement.sourcePath, (exists) => {
+                      if (!exists) {
+                        this.ntCall('ns-ntApi', 'nodeIKernelMsgService/downloadRichMedia', [
+                          {
+                            getReq: {
+                              msgId: msg.msgId,
+                              chatType: msg.chatType,
+                              peerUid: msg.peerUin,
+                              elementId: element.elementId,
+                              thumbSize: 0,
+                              downloadType: 1,
+                              filePath: element.picElement?.sourcePath,
+                            },
+                          },
+                          undefined,
+                        ]).catch((e) => {
+                          info(`failed to download media ${element.picElement?.sourcePath}, ${e.message}`);
+                        });
+                      }
+                    });
                     return `[CQ:image,file=${element.picElement.sourcePath}]`;
                   }
                   return '';
