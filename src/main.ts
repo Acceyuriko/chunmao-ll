@@ -143,7 +143,7 @@ class Adapter {
     const patched_send = (channel: string, ...args: any) => {
       if (!/^ns-LoggerApi/.test(args?.[0]?.eventName)) {
         const cmd = args?.[1]?.[0];
-        if (cmd?.cmdName === 'nodeIKernelMsgListener/onRecvMsg') {
+        if (cmd?.cmdName === 'nodeIKernelMsgListener/onRecvActiveMsg') {
           info('onRecvMsg', util.inspect(cmd.payload));
           (cmd.payload.msgList as MessageElement['raw'][]).forEach((msg) => {
             this.request({
